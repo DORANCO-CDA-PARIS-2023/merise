@@ -1,21 +1,22 @@
 START TRANSACTION;
 CREATE DATABASE bibliotheque;
+USE bibliotheque;
 CREATE TABLE auteurs
 (
-id INT NOT NULL,
+id INT AUTO_INCREMENT NOT NULL,
 prenom VARCHAR,
 nom VARCHAR,
 PRIMARY KEY (id)
 );
 CREATE TABLE genres
 (
-id INT NOT NULL,
+id INT AUTO_INCREMENT NOT NULL,
 genre VARCHAR
 PRIMARY KEY (id)
 );
 CREATE TABLE livres
 (
-id INT NOT NULL,
+id INT AUTO_INCREMENT NOT NULL,
 titre VARCHAR,
 id_auteur int,
 PRIMARY KEY (id),
@@ -31,7 +32,7 @@ PRIMARY KEY (id)
 );
 CREATE TABLE emprunts
 (
-id INT NOT NULL,
+id INT AUTO_INCREMENT NOT NULL,
 id_livre int,
 id_etudiant int,
 PRIMARY KEY (id),
@@ -40,7 +41,7 @@ FOREIGN KEY (id_etudiant) REFERENCES etudiants(id),
 );
 CREATE TABLE appartenances
 (
-id INT NOT NULL,
+id INT AUTO_INCREMENT NOT NULL,
 id_livre int,
 id_genre int,
 PRIMARY KEY (id),
