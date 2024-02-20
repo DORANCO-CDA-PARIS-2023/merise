@@ -108,6 +108,12 @@ SELECT Book.title
 FROM Book
          JOIN borrow ON Book.id = borrow.id_book
 WHERE borrow.id_student = '3';
+SELECT COUNT(*) AS total_books FROM Book;
+SELECT Author.id, Author.firstname,  COUNT(Book.id) AS total_books
+FROM Author
+         LEFT JOIN Book ON Author.id = Book.id_author
+GROUP BY Author.id, Author.firstname;
+
 
 
 
