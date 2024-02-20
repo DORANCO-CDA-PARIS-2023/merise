@@ -56,13 +56,25 @@ WHERE s.id IN (
 );
 
 -- 14/ Affichez les livres, les auteurs et les emprunts associés pour un étudiant spécifique.
-
+SELECT s.id AS "id_student", borrow.*, book.*, a.*
+FROM student s
+JOIN borrow ON borrow.id_student=s.id
+JOIN book ON book.id=borrow.id_book
+JOIN author a ON a.id=book.id_author
+WHERE s.id=1;
 
 -- 15/ Affichez le nombre d'emprunts tardifs (retour après la date prévue) pour chaque livre.
-
+SELECT book.title, COUNT(borrow.id) AS "nombre_d_emprunts_tardifs"
+FROM book
+LEFT JOIN borrow ON book.id = borrow.id_book AND borrow.Date_back > borrow.Date_back_schedulde
+GROUP BY book.title;
 
 -- 16/ Affichez le nombre d'emprunts effectués par chaque étudiant, trié par ordre décroissant du nombre  d'emprunts.
-
+SELECT s.name, COUNT(borrow.id) AS "nb_emprunts"
+FROM student s
+LEFT JOIN borrow ON s.id = borrow.id_student
+GROUP BY s.name
+ORDER BY nb_emprunts DESC;
 
 -- 17/ Classez les livres en fonction de leur année de publication en catégories (par exemple, "Avant 2000", "Entre 2000 et 2010", "Après 2010").
 
