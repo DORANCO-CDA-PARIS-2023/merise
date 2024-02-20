@@ -1,11 +1,12 @@
 SELECT * FROM book;
 SELECT * FROM student JOIN borrow ON student.id = borrow.id_student WHERE date_borrow > '2023-02-01';
-SELECT firstname, name FROM author JOIN book ON author.id = book.id_author;
+SELECT CONCAT(firstname, ' ', name) AS 'Auteur', book.title FROM author JOIN book ON author.id = book.id_author;
 SELECT *, book.title FROM borrow JOIN book ON borrow.id_book = book.id WHERE id_student = 1;
 SELECT COUNT(*) AS nombre_livres FROM book;
-SELECT id_author, COUNT(*) AS nombre_livres FROM book GROUP BY id_author;
+SELECT author.firstname, author.name, COUNT(*) AS nombre_livres FROM book JOIN author ON book.id_author = author.id GROUP BY id_author;
 SELECT DISTINCT * FROM book JOIN borrow ON book.id = borrow.id_book;
 SELECT DISTINCT * FROM book WHERE id IN (SELECT id_book FROM borrow);
+SELECT AVG(YEAR(birthday)) FROM author;
 SELECT * FROM student WHERE id NOT IN (SELECT id_student FROM borrow);
 SELECT id_student, COUNT(*) AS nombre_emprunts FROM borrow GROUP BY id_student;
 SELECT * FROM borrow JOIN student ON borrow.id_student = student.id JOIN book ON borrow.id_book = book.id JOIN author ON book.id_author = author.id;
