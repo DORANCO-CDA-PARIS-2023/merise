@@ -84,6 +84,7 @@ INSERT INTO borrow (id, Date_borrow, Date_back_schedulde, Date_back, id_book, id
      (1, '2023-02-01', '2023-02-15', '2023-02-14', 1, 1),
      (2, '2023-02-02', '2023-02-16', '2023-02-18', 2, 2),
      (3, '2023-02-03', '2023-02-17', NULL, 3, 3);
+     (4, '2023-02-08', '2023-12-19', NULL, 3, 1);
 
 INSERT INTO genre (id, name) VALUES
     (1, 'Fantasy'),
