@@ -49,6 +49,8 @@ CREATE TABLE IF NOT EXISTS categories (
     FOREIGN KEY(genre_id) REFERENCES genre(id)
 );
 
+
+-- DATA
 INSERT INTO auteur (nom, prenom) VALUES
 ('Dupont', 'Jean'),
 ('Martin', 'Marie'),
@@ -78,3 +80,11 @@ INSERT INTO categories (livre_id, genre_id) VALUES
 (1, 1),
 (2, 2),
 (3, 3);
+
+-- VIEWS
+CREATE VIEW etudiant_emprunts AS 
+SELECT emprunts.id AS "N° Emprunt", CONCAT(etudiant.nom, " ", etudiant.prenom) AS "Nom de l'étudiant", livre.titre AS "Titre du livre" 
+FROM emprunts 
+JOIN etudiant ON emprunts.etudiant_id=etudiant.id 
+JOIN livre ON emprunts.livre_id=livre.id 
+JOIN auteur ON auteur.id=livre.id;
