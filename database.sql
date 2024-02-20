@@ -44,3 +44,33 @@ CREATE TABLE IF NOT EXISTS categories (
     FOREIGN KEY(livre_id) REFERENCES livre(id),
     FOREIGN KEY(genre_id) REFERENCES genre(id)
 );
+
+INSERT INTO auteur (nom, prenom) VALUES
+('Dupont', 'Jean'),
+('Martin', 'Marie'),
+('Leroy', 'Pierre');
+
+INSERT INTO livre (titre, date_de_parution, auteur_id) VALUES
+('L''histoire', '2020-01-01 10:00:00', 1),
+('Le voyage', '2019-05-15 14:30:00', 2),
+('La découverte', '2021-03-10 09:45:00', 3);
+
+INSERT INTO etudiant (nom, prenom) VALUES
+('Dupuis', 'Sophie'),
+('Martin', 'Pierre'),
+('Leroy', 'Emma');
+
+INSERT INTO emprunts (livre_id, auteur_id) VALUES
+(1, 1),
+(2, 2),
+(3, 3);
+
+INSERT INTO genre (nom) VALUES
+('Fiction'),
+('Romance'),
+('Science-fiction');
+
+INSERT INTO categories (livre_id, genre_id) VALUES
+(1, 1),
+(2, 2),
+(3, 3);
