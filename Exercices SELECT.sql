@@ -54,12 +54,13 @@ WHERE
 -- JSON vide car autant étudiant n'est dans ce cas
 
 -- 9. Afficher la moyenne des années de naissance des auteurs.
--- ne sais pas
+SELECT ROUND(AVG(YEAR(BIRTHDAY))) AS MoyenneAnneeNaissance
+FROM author;
 
 -- 10. Affichez le nombre d'emprunts effectués par chaque étudiant.
 SELECT student.name, student.firstname, COUNT(borrow.id) AS nombre_emprunts
 FROM student
-    JOIN borrow ON student.id = borrow.id_student
+    LEFT JOIN borrow ON student.id = borrow.id_student -- j'avais mis juste JOIN avant parce que les infos propres à B on ne s'en sert pas
 GROUP BY
     student.id;
 
@@ -122,7 +123,11 @@ GROUP BY
 ORDER BY COUNT(borrow.id) DESC;
 
 -- 19.Affichez la durée moyenne d'emprunt en jours.
--- ne sais pas
+SELECT AVG(
+        DATEDIFF(Date_back, Date_borrow)
+    ) AS DuréeMoyenneEmprunt
+FROM borrow;
+--Source correction : https://sql.sh/fonctions/datediff
 
 -- 20. Affichez les livres qui n'ont jamais été empruntés.
 SELECT * FROM book WHERE id NOT IN( SELECT id_book FROM borrow );
