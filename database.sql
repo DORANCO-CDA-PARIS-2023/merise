@@ -64,7 +64,7 @@ INSERT INTO etudiant (nom, prenom) VALUES
 ('Martin', 'Pierre'),
 ('Leroy', 'Emma');
 
-INSERT INTO emprunts (livre_id, auteur_id) VALUES
+INSERT INTO emprunts (livre_id, etudiant_id) VALUES
 (1, 1),
 (2, 2),
 (3, 3);
