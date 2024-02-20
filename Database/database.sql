@@ -118,15 +118,91 @@ SELECT DISTINCT Book.*
 FROM Book
          JOIN borrow ON book.id=borrow.id_book;
 
+
 SELECT AVG(birthday) AS average_year_of_birth
 FROM Author;
 SELECT Student.id, Student.firstname, Student.name
 FROM student
         LEFT JOIN borrow b on student.id = b.id_book
         GROUP BY Student.id, Student.firstname,b.id_book;
-SELECT borrow.id_book,borrow.id_student, COUNT(id_student) AS Numberofbook FROM borrow
-              LEFT JOIN student s on borrow.id_student = s.id
-GROUP BY s.id, s.firstname,s.student_number;
+SELECT DISTINCT b.title
+FROM book b
+         JOIN borrow br ON b.id = br.id_book;
+
+SELECT s.name, s.firstname
+FROM student s
+         LEFT JOIN borrow br ON s.id = br.id_student
+WHERE br.id IS NULL;
+
+SELECT AVG(YEAR(birthday)) AS average_year_of_birth
+FROM author;
+SELECT s.name, s.firstname, COUNT(br.id) AS num_borrowed_books
+FROM student s
+         LEFT JOIN borrow br ON s.id = br.id_student
+GROUP BY s.id;
+SELECT *
+FROM book
+SELECT s.name, s.firstname
+FROM student s
+         JOIN (
+    SELECT id_student, COUNT(*) AS num_borrowed_books
+    FROM borrow
+    GROUP BY id_student
+) AS borrow_counts ON s.id = borrow_counts.id_student
+WHERE borrow_counts.num_borrowed_books > 3;
+
+
+SELECT b.title AS book_title, a.name AS author_name, a.firstname AS author_firstname, br.Date_borrow, br.Date_back_schedulde, br.Date_back
+FROM borrow br
+         JOIN book b ON br.id_book = b.id
+         JOIN author a ON b.id_author = a.id
+WHERE br.id_student = 1;
+
+
+SELECT b.title AS book_title, a.name AS author_name, a.firstname AS author_firstname, br.Date_borrow, br.Date_back_schedulde, br.Date_back
+FROM borrow br
+         JOIN book b ON br.id_book = b.id
+         JOIN author a ON b.id_author = a.id
+WHERE br.id_student = 2;
+
+
+SELECT b.title AS book_title, COUNT(*) AS late_returns
+FROM borrow br
+         JOIN book b ON br.id_book = b.id
+WHERE br.Date_back > br.Date_back_schedulde
+GROUP BY b.id;
+
+SELECT s.name, s.firstname, COUNT(br.id) AS num_loans
+FROM student s
+         LEFT JOIN borrow br ON s.id = br.id_student
+GROUP BY s.id
+ORDER BY num_loans DESC;
+
+
+
+SELECT title,
+       CASE
+           WHEN year_publish < 2000 THEN 'Before 2000'
+           WHEN year_publish BETWEEN 2000 AND 2010 THEN 'Between 2000 and 2010'
+           ELSE 'After 2010'
+           END AS publication_category
+FROM book;
+
+
+SELECT b.title, br.Date_borrow, br.Date_back
+FROM borrow br
+         JOIN book b ON br.id_book = b.id
+ORDER BY br.Date_borrow
+LIMIT 10;
+SELECT AVG(DATEDIFF(Date_back, Date_borrow)) AS average_loan_period
+FROM borrow;
+
+
+SELECT b.title
+FROM book b
+         LEFT JOIN borrow br ON b.id = br.id_book
+WHERE br.id IS NULL;
+
 
 
 
