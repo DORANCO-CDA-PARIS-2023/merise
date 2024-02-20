@@ -1,44 +1,94 @@
-CREATE TABLE Livre (
-    ID_Livre INT PRIMARY KEY NOT NULL,
-    ID_Auteur INT,
-    ID_Genre INT,
-    Titre VARCHAR(255),
-    Annee_publication YEAR,
-    ISBN VARCHAR(20),
-    FOREIGN KEY (ID_Auteur) REFERENCES Auteur(ID_Auteur),
-    FOREIGN KEY (ID_Genre) REFERENCES Genre(ID_Genre)
+DROP DATABASE IF EXISTS doranco_merise;
+CREATE DATABASE doranco_merise;
+
+USE doranco_merise;
+
+CREATE TABLE author (
+    id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(50),
+    firstname VARCHAR(50),
+    birthday DATE,
+    PRIMARY KEY(id)
 );
 
-CREATE TABLE Auteur (
-    ID_Auteur INT PRIMARY KEY NOT NULL,
-    Nom VARCHAR(255),
-    Prenom VARCHAR(255),
-    Nationalite VARCHAR(255),
+
+CREATE TABLE book (
+    id INT NOT NULL AUTO_INCREMENT,
+    title VARCHAR(255),
+    year_publish YEAR,
+    id_author INT,
+    PRIMARY KEY (id),
+    FOREIGN KEY (id_author) REFERENCES author(id)
 );
 
-CREATE TABLE Etudiant (
-    ID_Etudiant INT PRIMARY KEY NOT NULL,
-    Nom VARCHAR(255),
-    Prenom VARCHAR(255),
-    Adresse VARCHAR(255),
-    Mail VARCHAR(255),
-    Téléphone VARCHAR(255),
+CREATE TABLE student (
+    id INT AUTO_INCREMENT,
+    name VARCHAR(50),
+    firstname VARCHAR(50),
+    student_number VARCHAR(15),
+    PRIMARY KEY (id),
+    UNIQUE (student_number)
 );
 
-CREATE TABLE Genre (
-    ID_Genre INT PRIMARY KEY NOT NULL,
-    Nom_genre VARCHAR(255),
-    Description VARCHAR(255),
-    
+
+CREATE TABLE borrow (
+    id INT PRIMARY KEY,
+    Date_borrow DATE,
+    Date_back_schedulde DATE,
+    Date_back DATE,
+    id_book INT,
+    id_student INT,
+    FOREIGN KEY (id_book) REFERENCES book(id),
+    FOREIGN KEY (id_student) REFERENCES student(id)
 );
 
-CREATE TABLE Emprunt (
-    ID_Emprunt INT PRIMARY KEY NOT NULL,
-    ID_Livre INT,
-    ID_Etudiant INT,
-    Date_emprunt DATE,
-    Date_retour DATE,
-    Status VARCHAR(255),
-    FOREIGN KEY (ID_Livre) REFERENCES Livre(ID_Livre),
-    FOREIGN KEY (ID_Etudiant) REFERENCES Etudiant(ID_Etudiant)
+
+CREATE TABLE genre (
+   id INT AUTO_INCREMENT,
+   name VARCHAR(50),
+   PRIMARY KEY (id)
 );
+
+CREATE TABLE book_genre (
+     id_book INT,
+     id_genre INT,
+     PRIMARY KEY (id_book, id_genre),
+     FOREIGN KEY (id_book) REFERENCES book(id),
+     FOREIGN KEY (id_genre) REFERENCES genre(id)
+);
+
+
+
+INSERT INTO author (id, name, firstname, birthday) VALUES
+    (1, 'Rowling', 'J.K.', '1965-07-31'),
+    (2, 'Tolkien', 'J.R.R.', '1892-01-03'),
+    (3, 'Martin', 'George R.R.', '1948-09-20');
+
+INSERT INTO book (id, title, year_publish, id_author) VALUES
+    (1, 'Harry Potter à l\'école des sorciers', 1997, 1),
+    (2, 'Le Seigneur des anneaux', 1954, 2),
+    (3, 'Game of Thrones', 1996, 3),
+    (4, 'Mistborn: The Final Empire', 2006, 2),
+    (5, 'The Blade Itself', 2006, 3),
+    (6, 'The Name of the Wind', 2007, NULL);
+
+
+INSERT INTO student (id, name, firstname, student_number) VALUES
+     (1, 'Dupont', 'Alice', 'A12345'),
+     (2, 'Martin', 'Luc', 'B67890'),
+     (3, 'Leclerc', 'Sophie', 'C54321');
+
+INSERT INTO borrow (id, Date_borrow, Date_back_schedulde, Date_back, id_book, id_student) VALUES
+     (1, '2023-02-01', '2023-02-15', '2023-02-14', 1, 1),
+     (2, '2023-02-02', '2023-02-16', '2023-02-18', 2, 2),
+     (3, '2023-02-03', '2023-02-17', NULL, 3, 3);
+
+INSERT INTO genre (id, name) VALUES
+    (1, 'Fantasy'),
+    (2, 'Science Fiction'),
+    (3, 'Mystery');
+
+INSERT INTO book_genre (id_book, id_genre) VALUES
+     (1, 1),
+     (2, 1),
+     (3, 3);
