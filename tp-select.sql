@@ -80,10 +80,16 @@ ORDER BY nb_emprunts DESC;
 
 
 -- 18/ Affichez les dix premiers livres empruntés.
-
+SELECT book.*
+FROM borrow
+JOIN book ON borrow.id_book = book.id
+ORDER BY borrow.Date_borrow ASC
+LIMIT 10;
 
 -- 19/ Affichez la durée moyenne d'emprunt en jours.
 
 
 -- 20/ Affichez les livres qui n'ont jamais été empruntés.
-
+SELECT *
+FROM book
+WHERE book.id NOT IN (SELECT borrow.id_book FROM borrow);
