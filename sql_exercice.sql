@@ -32,7 +32,6 @@ SELECT s.name, s.firstname, COUNT(b.id) AS total_emprunt FROM student s LEFT JOI
 SELECT b.Date_borrow, b.Date_back, bk.title AS book_title, a.name AS author_name, s.name AS student_name FROM borrow b LEFT JOIN student s ON b.id_student = s.id LEFT JOIN book bk ON b.id_book = bk.id LEFT JOIN author a ON a.id = bk.id_author;
 
 --12
-SELECT s.name, s.firstname, COUNT(b.id) AS total_emprunt FROM student s LEFT JOIN borrow b ON s.id = b.id_student GROUP BY s.name, s.firstname ORDER BY `total_emprunt` ASC
 SELECT b.title, b.year_publish FROM book b WHERE year_publish >= YEAR(NOW()) - 3;
 
 --13
