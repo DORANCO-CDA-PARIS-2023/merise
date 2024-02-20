@@ -72,6 +72,7 @@ INSERT INTO book (id, title, year_publish, id_author) VALUES
     (4, 'Mistborn: The Final Empire', 2006, 2),
     (5, 'The Blade Itself', 2006, 3),
     (6, 'The Name of the Wind', 2007, NULL);
+    (7, 'Naruto', 2023, NULL);
 
 
 INSERT INTO student (id, name, firstname, student_number) VALUES
