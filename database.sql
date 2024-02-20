@@ -71,7 +71,7 @@ INSERT INTO book (id, title, year_publish, id_author) VALUES
     (3, 'Game of Thrones', 1996, 3),
     (4, 'Mistborn: The Final Empire', 2006, 2),
     (5, 'The Blade Itself', 2006, 3),
-    (6, 'The Name of the Wind', 2007, NULL);
+    (6, 'The Name of the Wind', 2007, NULL),
     (7, 'Boruto', 2023, NULL);
 
 
