@@ -77,7 +77,8 @@ INSERT INTO book (id, title, year_publish, id_author) VALUES
 INSERT INTO student (id, name, firstname, student_number) VALUES
      (1, 'Dupont', 'Alice', 'A12345'),
      (2, 'Martin', 'Luc', 'B67890'),
-     (3, 'Leclerc', 'Sophie', 'C54321');
+     (3, 'Leclerc', 'Sophie', 'C54321'),
+     (4, 'Albert', 'Martin', 'D98765');
 
 INSERT INTO borrow (id, Date_borrow, Date_back_schedulde, Date_back, id_book, id_student) VALUES
      (1, '2023-02-01', '2023-02-15', '2023-02-14', 1, 1),

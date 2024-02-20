@@ -29,10 +29,13 @@ SELECT book.* FROM borrow JOIN book ON borrow.id_book=book.id;
 SELECT * FROM student s WHERE s.id NOT IN (SELECT id_student FROM borrow);
 
 -- 9/ Afficher la moyenne des années de naissance des auteurs.
-SELECT AVG(YEAR(birthday)) FROM author;
+SELECT ROUND(AVG(YEAR(birthday))) FROM author;
 
 -- 10/ Affichez le nombre d'emprunts effectués par chaque étudiant.
-SELECT s.name, s.firstname, COUNT(b.id) AS "Nombre d'emprunt" FROM student s JOIN borrow b ON s.id=b.id_student GROUP BY b.id;
+SELECT s.name, s.firstname, COUNT(b.id) AS "Nombre d'emprunt" 
+FROM student s 
+LEFT JOIN borrow b ON s.id=b.id_student 
+GROUP BY s.id;
 
 -- 11/ Affichez les détails des emprunts, y compris le titre du livre, le nom de l'auteur et le nom de l'étudiant.
 SELECT borrow.*, book.title, CONCAT(a.name, " ", a.firstname) AS "Auteur", CONCAT(s.name, " ", s.firstname) AS "Étudiant"
@@ -77,7 +80,13 @@ GROUP BY s.name
 ORDER BY nb_emprunts DESC;
 
 -- 17/ Classez les livres en fonction de leur année de publication en catégories (par exemple, "Avant 2000", "Entre 2000 et 2010", "Après 2010").
-
+SELECT title,
+    CASE
+        WHEN year_publish < 2000 THEN 'Avant 2000'
+        WHEN year_publish BETWEEN 2000 AND 2010 THEN 'Entre 2000 et 2010'
+        ELSE 'Après 2010'
+        END AS 'CatégoriePublication'
+FROM book;
 
 -- 18/ Affichez les dix premiers livres empruntés.
 SELECT book.*
@@ -87,7 +96,7 @@ ORDER BY borrow.Date_borrow ASC
 LIMIT 10;
 
 -- 19/ Affichez la durée moyenne d'emprunt en jours.
-
+SELECT ROUND(AVG(DATEDIFF(Date_back, Date_borrow))) AS DuréeMoyenneEmprunt FROM borrow;
 
 -- 20/ Affichez les livres qui n'ont jamais été empruntés.
 SELECT *
