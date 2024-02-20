@@ -1,0 +1,13 @@
+LES MODELS 
+
+=> Modèle concepteur de données (MCD)
+
+Modèle Logique de données (MLD)
+- Va nous aider à la mise en place des clés étrangères 
+
+=> Modèle Physique de données (MLD)
+- L'utilisation des noms et champs qui vont être utilisés dans la bdd de façon claire. 
+
+
+Exemple  
+On est dans une école, et les élèves apprennent des langages. 
