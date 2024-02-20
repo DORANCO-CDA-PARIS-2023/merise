@@ -1,0 +1,88 @@
+Affichez tous les livres disponibles dans la table "Livre".
+	SELECT * FROM book;
+
+Affichez les étudiants qui ont emprunté un livre après une date spécifique.
+	SELECT *
+	FROM student AS st
+	JOIN borrow ON st.id = borrow.id_student
+	WHERE borrow.Date_borrow > '2023-02-01';
+
+
+Affichez le nom et le prénom de l'auteur de chaque livre.
+	SELECT book.title, author.name AS nom_auteur, author.firstname AS prenom_auteur 
+	from book
+	join author on book.id_author = author.id;
+
+
+Affichez les livres empruntés par un étudiant spécifique en incluant les détails de l'emprunt.
+	SELECT book.titre, borrow.Date_borrow, borrow.Date_back_schedulde
+	FROM book
+	JOIN borrow ON book.id_livre = borrow.id_book
+	JOIN borrow ON borrow.id_student = student.id
+	WHERE student.nom = 'NomEtudiant' AND student.name = 'Leclerc';
+
+
+Comptez le nombre total de livres dans la bibliothèque.
+	select count(*) from book;
+
+
+Affichez le nombre total de livres écrits par chaque auteur.
+	SELECT author.name AS nom_auteur, author.firstname AS prenom_auteur, 	COUNT(book.id) AS nombre_de_livres
+	FROM author
+	JOIN book ON author.id = book.id_author
+	GROUP BY author.id, author.name, author.firstname;
+
+
+Affichez les livres qui ont été empruntés au moins une fois.
+	select * from book
+	where id_author is not NULL ;
+
+
+Affichez les étudiants qui n'ont pas encore emprunté de livre.
+	select * from student
+	join borrow on student.id = borrow.id_student
+	where borrow.id_student is NULL ;
+
+Afficher la moyenne des années de naissance des auteurs.
+	select round(avg((year(birthday)))) as 'moyenne des années de naissance' from author;
+
+
+
+
+Affichez le nombre d'emprunts effectués par chaque étudiant.
+	SELECT student.name, student.firstname, COUNT(borrow.id) AS nombre_emprunts
+	FROM student
+	JOIN borrow ON student.id = borrow.id_student
+	GROUP BY student.id, student.name, student.firstname;
+
+Affichez les détails des emprunts, y compris le titre du livre, le nom de l'auteur et le nom de l'étudiant.
+
+
+
+Affichez les livres qui ont été publiés au cours des trois dernières années.
+Affichez les étudiants ayant emprunté plus de trois livres.
+Affichez les livres, les auteurs et les emprunts associés pour un étudiant spécifique.
+Affichez le nombre d'emprunts tardifs (retour après la date prévue) pour chaque livre.
+Affichez le nombre d'emprunts effectués par chaque étudiant, trié par ordre décroissant du nombre  d'emprunts.
+Classez les livres en fonction de leur année de publication en catégories (par exemple, "Avant 2000", "Entre 2000 et 2010", "Après 2010").
+Affichez les dix premiers livres empruntés.
+Affichez la durée moyenne d'emprunt en jours.
+Affichez les livres qui n'ont jamais été empruntés.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
