@@ -66,7 +66,7 @@ INSERT INTO author (id, name, firstname, birthday) VALUES
     (3, 'Martin', 'George R.R.', '1948-09-20');
 
 INSERT INTO book (id, title, year_publish, id_author) VALUES
-    (1, 'Harry Potter à l\'école des sorciers', 1997, 1),
+    (1, 'Harry Potter à l''école des sorciers', 1997, 1),
     (2, 'Le Seigneur des anneaux', 1954, 2),
     (3, 'Game of Thrones', 1996, 3),
     (4, 'Mistborn: The Final Empire', 2006, 2),
