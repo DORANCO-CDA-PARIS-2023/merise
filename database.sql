@@ -1,3 +1,7 @@
+DROP DATABASE IF EXISTS merise;
+
+CREATE DATABASE merise;
+
 CREATE TABLE IF NOT EXISTS auteur (
     id INT NOT NULL AUTO_INCREMENT,
     nom VARCHAR(50) NOT NULL,
@@ -24,10 +28,10 @@ CREATE TABLE IF NOT EXISTS etudiant (
 CREATE TABLE IF NOT EXISTS emprunts (
     id INT NOT NULL AUTO_INCREMENT,
     livre_id INT NOT NULL,
-    auteur_id INT NOT NULL,
+    etudiant_id INT NOT NULL,
     PRIMARY KEY(id),
     FOREIGN KEY(livre_id) REFERENCES livre(id),
-    FOREIGN KEY(auteur_id) REFERENCES auteur(id)
+    FOREIGN KEY(etudiant_id) REFERENCES etudiant(id)
 );
 
 CREATE TABLE IF NOT EXISTS genre (
