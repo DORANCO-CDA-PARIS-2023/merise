@@ -5,9 +5,8 @@ SELECT *, book.title FROM borrow JOIN book ON borrow.id_book = book.id WHERE id_
 SELECT COUNT(*) AS nombre_livres FROM book;
 SELECT author.firstname, author.name, COUNT(*) AS nombre_livres FROM book JOIN author ON book.id_author = author.id GROUP BY id_author;
 SELECT DISTINCT * FROM book JOIN borrow ON book.id = borrow.id_book;
-SELECT DISTINCT * FROM book WHERE id IN (SELECT id_book FROM borrow);
-SELECT AVG(YEAR(birthday)) FROM author;
 SELECT * FROM student WHERE id NOT IN (SELECT id_student FROM borrow);
+SELECT AVG(YEAR(birthday)) FROM author;
 SELECT id_student, COUNT(*) AS nombre_emprunts FROM borrow GROUP BY id_student;
 SELECT * FROM borrow JOIN student ON borrow.id_student = student.id JOIN book ON borrow.id_book = book.id JOIN author ON book.id_author = author.id;
 SELECT * FROM book WHERE year_publish >= '2021';
@@ -22,6 +21,6 @@ SELECT id_student, COUNT(*) AS nombre_emprunts FROM borrow GROUP BY id_student O
  ELSE 'Après 2000'
  END AS Catégorie
  FROM book;
- SELECT * FROM book JOIN borrow WHERE book.id = borrow.id_book LIMIT 10;
+SELECT * FROM book JOIN borrow WHERE book.id = borrow.id_book LIMIT 10;
 SELECT AVG(DATEDIFF(date_back, date_borrow)) FROM borrow;
 SELECT * FROM book WHERE id NOT IN (SELECT id_book FROM borrow);
