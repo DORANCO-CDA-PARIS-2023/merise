@@ -1,0 +1,73 @@
+1 - SELECT * FROM book;
+2 -SELECT s.name, s.firstname
+FROM student AS s
+JOIN borrow AS b
+ON s.id = b.id_student
+WHERE b.Date_borrow > '2023-02-01';
+3 -  SELECT b.title, a.name, a.firstname
+FROM book as b
+JOIN author as a
+ON a.id = b.id_author;
+4 - SELECT s.name, s.firstname, b.Date_borrow, b.Date_back_schedulde, b.Date_back, bk.title
+FROM student AS s
+JOIN borrow AS b ON s.id = b.id_student
+JOIN book AS bk ON b.id_book = bk.id
+WHERE s.id = 1;
+5 - SELECT COUNt(*) FROM book;
+6 - SELECT a.name, a.firstname, COUNT(b.id) AS Nombre_de_livres
+FROM author AS a
+JOIN book AS b ON a.id = b.id_author
+GROUP BY a.id;
+7 - SELECT bk.title
+FROM book AS bk
+JOIN borrow AS b ON bk.id = b.id_book
+GROUP BY bk.id;
+8- SELECT s.name, s.firstname
+FROM student AS s
+LEFT JOIN borrow AS b ON s.id = b.id_student
+WHERE b.id IS NULL;
+9 - SELECT AVG(YEAR(birthday)) AS Moyenne_Annee_Naissance
+FROM author;
+10 - SELECT s.name, s.firstname, COUNT(*) AS nombre_emprunt
+FROM student as s
+JOIN borrow as b
+ON s.id = b.id_student
+GROUP BY s.id;
+11 - SELECT s.name AS Nom_etudiant, s.firstname AS Prenom_etudiant, b.Date_borrow, b.Date_back_schedulde, b.Date_back, bk.title AS Titre_livre, a.name AS Nom_auteur, a.firstname AS Prenom_auteur
+FROM borrow AS b
+JOIN student AS s ON b.id_student = s.id
+JOIN book AS bk ON b.id_book = bk.id
+JOIN author AS a ON bk.id_author = a.id;
+12 - SELECT title, year_publish
+FROM book
+WHERE year_publish >= YEAR(CURDATE()) - 3;
+13 - SELECT s.name, s.firstname, COUNT(b.id) AS Nombre_de_livres
+FROM student AS s
+JOIN borrow AS b ON s.id = b.id_student
+GROUP BY s.id
+HAVING COUNT(b.id) > 3;
+14 - SELECT s.name AS Nom_etudiant, s.firstname AS Prenom_etudiant, b.Date_borrow, b.Date_back_schedulde, b.Date_back, bk.title AS Titre_livre, a.name AS Nom_auteur, a.firstname AS Prenom_auteur
+FROM borrow AS b
+JOIN student AS s ON b.id_student = s.id
+JOIN book AS bk ON b.id_book = bk.id
+JOIN author AS a ON bk.id_author = a.id
+WHERE s.id = 2;
+15 - SELECT bk.title, COUNT(b.id) AS Nombre_emprunts_tardifs
+FROM book AS bk
+JOIN borrow AS b ON bk.id = b.id_book
+WHERE b.Date_back > b.Date_back_schedulde
+GROUP BY bk.id;
+16 - SELECT s.name, s.firstname, COUNT(b.id) AS Nombre_emprunts
+FROM student AS s
+JOIN borrow AS b ON s.id = b.id_student
+GROUP BY s.id
+ORDER BY Nombre_emprunts DESC;
+17 - SELECT title, year_publish,
+CASE
+    WHEN year_publish < 2000 THEN 'Avant 2000'
+    WHEN year_publish BETWEEN 2000 AND 2010 THEN 'Entre 2000 et 2010'
+    ELSE 'Après 2010'
+END AS Categorie
+FROM book;
+18 - 
+
