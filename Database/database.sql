@@ -114,6 +114,19 @@ FROM Author
          LEFT JOIN Book ON Author.id = Book.id_author
 GROUP BY Author.id, Author.firstname;
 
+SELECT DISTINCT Book.*
+FROM Book
+         JOIN borrow ON book.id=borrow.id_book;
+
+SELECT AVG(birthday) AS average_year_of_birth
+FROM Author;
+SELECT Student.id, Student.firstname, Student.name
+FROM student
+        LEFT JOIN borrow b on student.id = b.id_book
+        GROUP BY Student.id, Student.firstname,b.id_book;
+SELECT borrow.id_book,borrow.id_student, COUNT(id_student) AS Numberofbook FROM borrow
+              LEFT JOIN student s on borrow.id_student = s.id
+GROUP BY s.id, s.firstname,s.student_number;
 
 
 
